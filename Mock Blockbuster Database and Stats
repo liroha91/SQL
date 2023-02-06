@@ -1,0 +1,40 @@
+CREATE TABLE blockbuster_movies (id INTEGER PRIMARY KEY, title TEXT, release_year INTEGER, director TEXT, length_hrs INTEGER, box_office_billions INTEGER, price INTEGER);
+
+INSERT INTO blockbuster_movies VALUES (1, "Avatar", 2009, "James Cameron", 2.7, 2.8, 4);
+INSERT INTO blockbuster_movies VALUES (2, "Avengers: Endgame", 2019, "Joe Russo", 3.03, 2.7, 8);
+INSERT INTO blockbuster_movies VALUES (3, "Titanic", 1997, "James Cameron", 3.26, 2.2, 4);
+INSERT INTO blockbuster_movies VALUES (4, "Avatar: The Way of Water", 2022, "James Cameron", 3.2, 2.1, 8);
+INSERT INTO blockbuster_movies VALUES (5, "Star Wars Ep. VII: The Force Awakens", 2015, "J.J. Abrams", 2.26, 2, 8);
+INSERT INTO blockbuster_movies VALUES (6, "Avengers: Infinity War", 2018, "Joe Russo", 2.43, 2, 8);
+INSERT INTO blockbuster_movies VALUES (7, "Spider-Man: No Way Home", 2021, "Jon Watts", 2.46, 1.9, 8);
+INSERT INTO blockbuster_movies VALUES (8, "Jurassic World", 2015, "Colin Trevorrow", 2.06, 1.6, 8);
+INSERT INTO blockbuster_movies VALUES (9, "The Lion King", 2019, "Jon Favreau", 1.96, 1.6, 8);
+INSERT INTO blockbuster_movies VALUES (10, "The Avengers", 2012, "Joss Whedon", 2.38, 1.5, 4);
+INSERT INTO blockbuster_movies VALUES (11, "Furious 7", 2015, "James Wan", 2.33, 1.5, 8);
+INSERT INTO blockbuster_movies VALUES (12, "Top Gun: Maverick", 2022, "Joseph Kosinski", 2.18, 1.4, 8);
+INSERT INTO blockbuster_movies VALUES (13, "Frozen II", 2019, "Jennifer Lee", 1.71, 1.4, 8);
+INSERT INTO blockbuster_movies VALUES (14, "Avengers: Age of Ultron", 2015, "Joss Whedon", 2.35, 1.3, 8);
+INSERT INTO blockbuster_movies VALUES (15, "Black Panther", 2018, "Ryan Coogler", 2.25, 1.3, 8);
+
+--display completed database table
+SELECT * FROM blockbuster_movies;
+
+--display more pertinent info and sort by release year
+SELECT title, release_year, box_office_billions 
+FROM blockbuster_movies 
+ORDER BY release_year;
+
+--what are five most successful movies?
+SELECT title, director, box_office_billions
+FROM blockbuster_movies
+ORDER BY box_office_billions
+LIMIT 5;
+
+--display directors by total box office success
+SELECT DISTINCT director 
+FROM blockbuster_movies 
+ORDER BY box_office_billions;
+
+--display entire revenue from box office
+SELECT SUM(box_office_billions) 
+FROM blockbuster_movies;
