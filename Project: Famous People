@@ -1,0 +1,104 @@
+CREATE TABLE persons (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER);
+
+INSERT INTO persons (name, age) VALUES
+("Jami Gertz", 57);
+INSERT INTO persons (name, age) VALUES
+("Brock Pierce", 42);
+INSERT INTO persons (name, age) VALUES
+("Jerry Seinfeld", 68);
+INSERT INTO persons (name, age) VALUES
+("Dwayne Johnson", 50);
+INSERT INTO persons (name, age) VALUES
+("Shah Rukh Khan", 57);
+INSERT INTO persons (name, age) VALUES
+("Tom Cruise", 60);
+INSERT INTO persons (name, age) VALUES
+("George Clooney", 61);
+INSERT INTO persons (name, age) VALUES
+("Robert De Niro", 79);
+INSERT INTO persons (name, age) VALUES
+("Kevin Hart", 43);
+INSERT INTO persons (name, age) VALUES
+("Arnold Schwarzenegger", 75);
+
+CREATE TABLE net_worth (id INTEGER PRIMARY KEY AUTOINCREMENT, person_id INTEGER, net_worth_billions INTEGER);
+
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(1, 3);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(2, 2);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(3, .95);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(4, .8);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(5, .6);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(6, .6);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(7, .5);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(8, .5);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(9, .45);
+INSERT INTO net_worth (person_id, net_worth_billions) VALUES
+(10, .45);
+
+CREATE TABLE spouse (id INTEGER PRIMARY KEY AUTOINCREMENT, person_id INTEGER, spouse TEXT);
+
+INSERT INTO spouse (person_id, spouse) VALUES
+(1, "Anthony Ressler");
+INSERT INTO spouse (person_id, spouse) VALUES
+(3, "Jessica Seinfeld");
+INSERT INTO spouse (person_id, spouse) VALUES
+(4, "Lauren Hashian");
+INSERT INTO spouse (person_id, spouse) VALUES
+(5, "Gauri Khan");
+INSERT INTO spouse (person_id, spouse) VALUES
+(7, "Amal Clooney");
+INSERT INTO spouse (person_id, spouse) VALUES
+(9, "Eniko Hart");
+
+CREATE TABLE birthplace (id INTEGER PRIMARY KEY AUTOINCREMENT, person_id INTEGER, birthplace TEXT);
+
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(1, "Illinois");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(2, "Minnesota");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(3, "New York");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(4, "California");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(5, "India");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(6, "New York");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(7, "Kentucky");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(8, "New York");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(9, "Philadelphia");
+INSERT INTO birthplace (person_id, birthplace) VALUES
+(10, "Austria");
+
+/* Who are the top 10 wealthiest actors/comedians currently and what is their net worth (in billions)? */
+
+SELECT p.name, n.net_worth_billions
+FROM persons p
+JOIN net_worth n
+ON p.id = n.person_id;
+
+/* Which of the top 10 wealthiest actors/comedians currently have a spouse and what is the name of that spouse? */
+
+SELECT p.name, s.spouse
+FROM persons p
+LEFT JOIN spouse s
+ON p.id = s.person_id;
+
+/* What is the birthplace of each of the actors/comedians? */
+
+SELECT p.name, b.birthplace
+FROM persons p
+JOIN birthplace b
+ON p.id = b.person_id;
