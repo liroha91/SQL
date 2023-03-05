@@ -1,0 +1,69 @@
+SELECT * FROM customers LIMIT 20;
+
+/* What columns are in the customers table?
+Answer: order_id and acctnum */
+
+SELECT * FROM JanSales LIMIT 20;
+
+/* What columns are in the JanSales table?
+Answer: orderID, Product, Quantity, price, orderdate, and location. */
+
+/* What column(s) do customers table and JanSales table have in common?
+Answer: order_id/orderID */
+
+/* How many orders were placed in January? */
+SELECT COUNT(orderID)
+FROM JanSales
+WHERE length(orderID) = 6;
+/* Answer: 9,681 orders in January. */
+
+/* How many of those orders were for an iPhone? */
+SELECT distinct SUM(quantity), Product
+FROM JanSales
+WHERE Product = 'iPhone'
+AND length(orderID) = 6;
+/* Answer: 379 orders for iPhone. */
+
+/* Select the customer account numbers for all the
+orders that were placed in February. */
+SELECT distinct c.order_id, c.acctnum
+FROM customers c
+INNER JOIN FebSales f
+ON c.order_id = f.orderID
+WHERE length(orderID) = 6;
+
+/* Which product was the cheapest one sold in January,
+and what was the price? */
+SELECT Product, MIN(price)
+FROM JanSales
+WHERE length(orderID) = 6;
+/* Answer: Cheapest product sold in January was AAA 
+battery pack for $2.99 */
+
+/*What is the total revenue for each product sold in
+January? */
+SELECT SUM(quantity)*price AS revenue, product
+FROM JanSales
+GROUP BY product
+HAVING length(orderID) = 6;
+
+/* Which products were sold in February at 548 Lincoln
+St, Seattle, WA 98101? How many of each were sold and
+what was the total revenue? */
+SELECT SUM(quantity)*price AS revenue, product, quantity
+FROM FebSales
+WHERE location = '548 Lincoln St, Seattle, WA 98101';
+/* Answer: Revenue of $7.68 from two packs of AA Batteries. */
+
+/* How many customers ordered more than two products at
+a time in February, and what was the average amont spent
+for those customers? */
+SELECT COUNT(distinct customers.acctnum) AS repeat_customer, 
+AVG(quantity)*price AS average_spent
+FROM FebSales
+LEFT JOIN customers
+ON FebSales.orderID = customers.order_id
+WHERE FebSales.Quantity > 2
+AND length(orderid) = 6;
+/* Answer: 278 customers ordered at least twice, with an
+average of $12.79 spent. */
