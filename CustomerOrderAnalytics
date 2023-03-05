@@ -69,3 +69,10 @@ WHERE FebSales.Quantity > 2
 AND length(orderid) = 6;
 /* Answer: 278 customers ordered at least twice, with an
 average of $12.79 spent. */
+
+/* List all the products sold in Los Angeles in February, and include
+how many of each were sold. */
+SELECT SUM(quantity), Product
+From FebSales
+WHERE location like '%Los Angeles%'
+GROUP BY Product;
