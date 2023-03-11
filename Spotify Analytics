@@ -91,3 +91,19 @@ SELECT artist_name, track_name, MIN(popularity), MIN(tempo)
 FROM Spotifydata
 GROUP BY popularity
 LIMIT 1;
+
+# Made use of CTEs to categorize data.
+
+/* Calculate average popularity for artists in Spotify. */
+WITH popularity_average_CTE AS (
+SELECT s.artist_name, AVG(s.popularity) AS average_popularity
+FROM Spotifydata s
+GROUP BY s.artist_name
+)
+
+/* Avg Popularity of 90+, show name, avg popularity and
+label them as Top Star. */
+
+SELECT artist_name, average_popularity, 'Top Star' AS tag
+FROM popularity_average_CTE
+WHERE average_popularity >= 90;
