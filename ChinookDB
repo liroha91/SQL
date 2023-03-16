@@ -94,3 +94,17 @@ AND i.InvoiceDate like '2009%'
 GROUP BY e.LastName
 ORDER BY (ROUND(SUM(i.Total), 2)) DESC
 LIMIT 1;
+
+/* Which genre sold the most in 2009? */
+SELECT g.Name AS 'Genre Name', ROUND(SUM(i.Total), 2) AS 'Total'
+FROM genres g
+INNER JOIN tracks t
+ON g.Genreid = t.Genreid
+JOIN invoice_items it
+ON t.Trackid = it.Trackid
+JOIN invoices i
+ON it.Invoiceid = i.Invoiceid
+WHERE i.InvoiceDate like '2009%'
+GROUP BY g.Name
+ORDER BY (ROUND(SUM(i.Total), 2)) DESC
+LIMIT 1;
